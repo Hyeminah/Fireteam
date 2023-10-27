@@ -32,7 +32,7 @@ création d'un nom différent ? Suraya Hawthorne vendor in the tower,
 
 première page : image de la saison en cours (le temps du chargement )
 
-page d'accueil : header avec logo de l'application + login et/ou inscription -----> (cross play ..)
+page d'accueil : header avec logo de l'application + login  
 rappel du clan actuel avec progression du niveau en fonction de la saison et ceux des saisons passées et les jalons en cours pour la semaine
 rappel en premiere page des récompenses doublés de la semaines en cours avec le raid de la semaine ainsi que le nouveau.
 // avec godroll des armes de raid 
@@ -42,4 +42,17 @@ remind challenge with the clan
 
 page de profil du compte bungie 
 
+(le 26/10/23)
 création d'escouade avec notification du clan en premier, mais publication de la demande d'escouade en même temps 
+les gens vont plutot aller sur l'appli pour critiquer le clan, la nature humaine fait qu'on va rarement sur un site pour dire quelque chose de bien 
+Donc mettre en place un algo ou une solution de récupération de donnée pour générer des notations de clan 
+ex: un clan qui joue que entre eux sans jamais crée ou rejoindre d'escouades
+création via l'appli d'évènement + utilisation du calendrier 
+
+voir si on peut récuperer du contenue gratuit avec les dates des armes qui sortent ainsi que les raid a l'avance et les activités en récompenses doublés et raid de la semaine
+
+
+27/10/23 
+
+création d'escouade avec choix classique ( cross play/ mic/planification) mais rajouter avec un paratge direct avec le clan et planification emise dans le calendrier 
+donc est ce que les boutons ont une importance ? 
