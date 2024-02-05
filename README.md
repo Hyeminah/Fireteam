@@ -56,3 +56,19 @@ voir si on peut récuperer du contenue gratuit avec les dates des armes qui sort
 
 création d'escouade avec choix classique ( cross play/ mic/planification) mais rajouter avec un paratge direct avec le clan et planification emise dans le calendrier 
 donc est ce que les boutons ont une importance ? 
+
+01/02/24 
+creation d'une application centré sur les escouades dans les clans et avec la commu 
+l'idée etait de prendre l'api de bungie et de me servir de la connection du jeu afin de communiquer avec , pour crée une escouade , la rejoindre dans le jeu a l'heure renseigner dans la crée.
+choix pour le joueur de mettre sa création d'escouade dans la commu seulement ou dans le clan uniquement sans passer par un discord ou un bot qui le genere
+
+creation d'une notification lors de l'approche de l'activité ? 
+
+05/02/23 
+passage de l'oral blanc , 
+présentation de moi pas assez poussé,
+revoir la stact technique 
+
+pas en native car l'appli ne sera pas déployer car je ne vais pas utiliser l'api car trop complexe et surement des bugs a l'approche de la mise a jour prévu en juin 
+
+le but sera du coup de crée une database 
