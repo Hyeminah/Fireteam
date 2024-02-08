@@ -1,0 +1,22 @@
+{
+  "name": "appli-1",
+  "version": "1.0.0",
+  "description": "destiny application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hyeminah/appli.git"
+  },
+  "author": "hyeminah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hyeminah/appli/issues"
+  },
+  "homepage": "https://github.com/Hyeminah/appli#readme",
+  "dependencies": {
+    "@nestjs/core": "^10.3.2"
+  }
+}
