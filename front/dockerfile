@@ -1,0 +1,14 @@
+FROM node:20-alpine
+
+WORKDIR /app
+COPY . .
+RUN npm install --include=dev
+RUN npm run build
+
+EXPOSE 9229
+
+# Command to run the NestJS application
+CMD ["npm", "run", "preview"]
+
+
+
