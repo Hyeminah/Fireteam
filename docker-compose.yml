@@ -42,5 +42,19 @@ services:
     depends_on:
       - postgres_database
 
+  maildev:
+    container_name: devmail_destiny
+    image: maildev/maildev
+    restart: always
+    env_file:
+      - ./maildev.env
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"    
+
 volumes:
   postgres-data:
