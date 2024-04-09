@@ -1,15 +1,15 @@
 <script>
-    // Import the HomePage component
-    import HomePage from '$lib/components/HomePage.svelte';
-    import Header from '$lib/components/Header.svelte';
-    import Footer from '$lib/components/Footer.svelte';
-  </script>
-
-    <Header/>
-    <HomePage />
-    <Footer />
-    <!-- Content from individual pages will be inserted here -->
-    <slot></slot>
+  // Import the HomePage component
+ 
+  import LoginForm from "../lib/components/LoginForm.svelte";
+  import RegistrationForm from "../lib/components/RegistrationForm.svelte";
+</script>
 
 
-  
+<h2>Login</h2>
+<LoginForm />
+
+<h2>Register</h2>
+<RegistrationForm />
+
+
