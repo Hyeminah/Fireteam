@@ -13,7 +13,6 @@ CREATE TABLE activities (
 	name varchar(255) NOT NULL,
 	CONSTRAINT activities_pkey PRIMARY KEY (id),
 	CONSTRAINT activities_name_ukey UNIQUE (name)
-
 );
 
 CREATE TABLE clans (
@@ -32,12 +31,12 @@ CREATE TABLE players (
 	mail varchar(255) NOT NULL,
 	"password" char(60) NOT NULL,
 	pseudo varchar(50) NOT NULL,
-	clan_id int NOT NULL,
+	clan_id int NOT NULL,
 	CONSTRAINT players_pkey PRIMARY KEY (id),
 	CONSTRAINT players_mail_ukey UNIQUE (mail),
 	CONSTRAINT players_clans_fkey
 		FOREIGN KEY (clan_id)
-		REFERENCE clans (id)
+		REFERENCES clans (id)
 );
 
 
@@ -53,7 +52,6 @@ CREATE TABLE fireteams_clans(
 	CONSTRAINT fireteams_clans_fireteam_fkey
 			FOREIGN KEY (fireteam_id)
 			REFERENCES fireteams (id)
-	
 );
 
 CREATE TABLE players_activities (
@@ -70,7 +68,6 @@ CREATE TABLE players_activities (
 	CONSTRAINT players_activities_activity_fkey
 		FOREIGN KEY (activity_id)
 		REFERENCES activities (id)
-
 );
 
 CREATE TABLE players_fireteams (
@@ -82,7 +79,7 @@ CREATE TABLE players_fireteams (
 	CONSTRAINT players_fireteams_pkey PRIMARY KEY (id),
 	CONSTRAINT players_fireteams_player_fireteam_ukey UNIQUE (player_id, fireteam_id),
 	CONSTRAINT players_fireteams_player_fkey
-		FOREIGN KEY (players_id)
+		FOREIGN KEY (player_id)
 		REFERENCES players (id),
 	CONSTRAINT players_fireteams_fireteam_fkey
 		FOREIGN KEY (fireteam_id)
