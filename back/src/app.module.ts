@@ -1,26 +1,26 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PlayerModule } from './Entities/Players/players.module';
+import { PlayerModule } from './Players/players.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Player } from './Entities/Players/players.entity';
-import { FireteamModule } from './Entities/Fireteams/fireteams.module'; 
-import { Fireteam } from './Entities/Fireteams/fireteams.entity'; 
+import { Player } from './Players/players.entity';
+// import { FireteamModule } from './Fireteams/fireteams.module'; 
+// import { Fireteam } from './Fireteams/fireteams.entity'; 
 
 
 
 @Module({
   imports: [
-    FireteamModule,
+    // FireteamModule,
     PlayerModule,
     TypeOrmModule.forRoot({
       type: 'postgres', 
-      host: 'localhost', 
-      port: 5434, 
-      username: 'myuser', 
-      password: 'mypassword', 
-      database: 'my_database', 
-      entities: [ Fireteam, Player], 
+      host: process.env.DB_HOST, 
+      port: parseInt(process.env.DB_PORT),
+      username: process.env.DB_USER, 
+      password: process.env.DB_PASSWORD, 
+      database: process.env.DB_NAME, 
+      entities: [Player], 
       synchronize: false, 
       autoLoadEntities: true,
       logging:true,
