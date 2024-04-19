@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn } from 'typeorm';
-import { Fireteam } from 'src/Entities/Fireteams/fireteams.entity';
+import { Fireteam } from 'src/Fireteams/fireteams.entity';
 
 
 @Entity('players')

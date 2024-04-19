@@ -1,6 +1,7 @@
 <script lang="ts">
   import logo from "/src/lib/img/bungie_logo_with_shield.svg";
   import header_background from "/src/lib/img/seasonbackground_23.jpg";
+ 
 </script>
 
 <div class="header">
@@ -10,6 +11,12 @@
   <img class="header_background" src={header_background} alt="season" />
 
   <h1 class="title" id="pageTitle">Default Title</h1>
+  <nav class="menu content">
+    <!-- <ul>
+      <Lien ref="./authentification " text="authentification"/>
+      <Lien ref="./inscription " text="sign up" />
+    </ul> -->
+  </nav>
 </div>
 
 <style>
@@ -49,6 +56,7 @@
     left: 0;
     width: 100%; 
     height: 100%; 
+   
   }
 
  

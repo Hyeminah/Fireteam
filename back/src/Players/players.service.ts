@@ -11,27 +11,17 @@ export class PlayerService {
     private readonly playerRepository: Repository<Player>,
   ) {}
 
-  async createPlayer(createPlayerDto: CreatePlayerDto): Promise<Player> {
-    const { id,pseudo, mail, password } = createPlayerDto;
-    const player = this.playerRepository.create({id, pseudo, mail, password });
-    return this.playerRepository.save(player);
+  async createPlayer(createPlayerDto: CreatePlayerDto) {
+    //const { id,pseudo, mail, password } = createPlayerDto;
+    
+    const newPlayer = new Player()
+    newPlayer.pseudo = createPlayerDto.pseudo
+    newPlayer.mail = createPlayerDto.mail
+    newPlayer.password = createPlayerDto.password
+    return this.playerRepository.save(newPlayer);
   }
 
-  // async findOne(id: number): Promise<Player> {
-  //     const player = await this.playerRepository.findOne(id); // Correct usage
-  //     if (!player) {
-  //       throw new NotFoundException(`Player with ID ${id} not found`);
-  //     }
-  //     return player;
-  //   }
   }
-
-  // async findAll(): Promise<Player[]> {
-  //   return this.playerRepository.find();
-  // }
-
-  
-  
 
 //   async update(id: number, updatePlayerDto: CreatePlayerDto): Promise<Player> {
 //     const player = await this.findOne(id);

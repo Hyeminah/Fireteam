@@ -8,8 +8,8 @@ import { Player } from "./players.entity";
 export class PlayerController {
     constructor (private readonly playersService: PlayerService ) {}
     
-    @Post("register")
-    async createPlayer (@Body() CreatePlayerDto: CreatePlayerDto,): Promise<Player>  {
+    @Post("/register")
+    async createPlayer (@Body() CreatePlayerDto: CreatePlayerDto,) {
         console.log(CreatePlayerDto);
         return this.playersService.createPlayer(CreatePlayerDto);
     }

@@ -1,5 +1,5 @@
 export interface player {
-    email: string,
+    mail: string,
     pseudo: string,
     password: string
 
