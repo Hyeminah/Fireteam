@@ -3,72 +3,78 @@
   import type { player } from "../../routes/player/player";
 
   export let inputData: player = {
-    mail: "",
     pseudo: "",
+    mail: "",
     password: "",
   };
+  let confirmPassword = "";
+
+  let passwordMatch = false;
 
   async function submit() {
-    try {
-      const response = await fetch("http://localhost:3000/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(inputData),
-      });
+    if ((passwordMatch = inputData.password === confirmPassword)) {
+      try {
+        const response = await fetch("http://localhost:3000/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(inputData),
+        });
 
-      if (response.ok) {
-        console.log("Data sent successfully");
-      } else {
-        console.error("Failed to send data:", response.statusText);
+        if (response.ok) {
+          console.log("Data sent successfully");
+        } else {
+          console.error("Failed to send data:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error sending data:", error);
       }
-    } catch (error) {
-      console.error("Error sending data:", error);
+    } else {
+      alert("Passwords do not match");
     }
   }
 </script>
 
-
-  <div class="form-container">
-    <form on:submit={submit}>
-      <label for="pseudo">Pseudo:</label >
-      <input type="text" bind:value={inputData.pseudo} id="pseudo" required />
-      <label for="email">Email:</label>
-      <input type="email" bind:value={inputData.mail} id="email" required />
-      <label for="password">Password:</label>
-      <input
-        type="password"
-        bind:value={inputData.password}
-        id="password"
-        required
-      />
-      <input
-        type="confirm password"
-        bind:value={inputData.password}
-        id="confirm password"
-        required
-      />
-      <button type="submit">Register</button>
-    </form>
-  </div>
-
+<div class="form-container">
+  <form on:submit={submit}>
+    <label for="pseudo">Pseudo:</label>
+    <input type="text" bind:value={inputData.pseudo} id="pseudo" required />
+    <label for="email">Email:</label>
+    <input type="email" bind:value={inputData.mail} id="email" required />
+    <label for="password">Password:</label>
+    <input
+      type="password"
+      bind:value={inputData.password}
+      id="password"
+      required
+    />
+    <label for="password">Confirm Password:</label>
+    <input
+      type="password"
+      bind:value={confirmPassword}
+      id="confirm password"
+      required
+    />
+    <button type="submit">Register</button>
+  </form>
+</div>
 
 <style>
-.form-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #1f2227;
-  padding: 20px;
-  border-radius: 10px;
-  width: 300px;
-  z-index: 1;
-}
+  .form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1f2227;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    z-index: 1;
+  }
 
   .form-container label {
     color: white;

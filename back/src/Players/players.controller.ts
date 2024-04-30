@@ -13,5 +13,9 @@ export class PlayerController {
         console.log(CreatePlayerDto);
         return this.playersService.createPlayer(CreatePlayerDto);
     }
-    
+    @Post ("/login")
+    async loginPlayer (@Body() CreatePlayerDto: CreatePlayerDto,) {
+        console.log(CreatePlayerDto);
+        return this.playersService.createPlayer(CreatePlayerDto);
+    }
 }
