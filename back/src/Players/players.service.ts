@@ -2,7 +2,10 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Player } from './players.entity';
+import * as bcrypt from 'bcrypt';
 import { CreatePlayerDto } from './players.dto';
+
+
 
 @Injectable()
 export class PlayerService {
@@ -13,14 +16,25 @@ export class PlayerService {
 
   async createPlayer(createPlayerDto: CreatePlayerDto) {
     //const { id,pseudo, mail, password } = createPlayerDto;
-    
+    const hashedPassword = await bcrypt.hash(createPlayerDto.password, 10);
     const newPlayer = new Player()
-    newPlayer.pseudo = createPlayerDto.pseudo
-    newPlayer.mail = createPlayerDto.mail
-    newPlayer.password = createPlayerDto.password
+    newPlayer.pseudo = createPlayerDto.pseudo,
+    newPlayer.mail = createPlayerDto.mail,
+    newPlayer.password = hashedPassword
+    
     return this.playerRepository.save(newPlayer);
   }
-
+  async loginPlayer(createPlayerDto: CreatePlayerDto){
+    const player = await this.playerRepository.findOne ({
+      where: {
+        mail: createPlayerDto.mail,
+        password: createPlayerDto.password
+      }
+    })
+    if (!player) {
+      throw new NotFoundException('Player not found');
+    
+  }
   }
 
 //   async update(id: number, updatePlayerDto: CreatePlayerDto): Promise<Player> {
@@ -38,4 +52,4 @@ export class PlayerService {
 //     await this.playerRepository.remove(player);
 //   }
 
-// }
+}

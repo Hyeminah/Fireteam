@@ -1,47 +1,49 @@
 <script lang="ts">
   import Header from "$lib/components/Header.svelte";
   import type { player } from "../../routes/player/player";
+  import Footer from "./Footer.svelte";
 
   export let SignIn: player = {
-  let mail = "";
-  let password = "";
+    pseudo: "",
+    mail: "",
+    password: "",
   };
 
-   async function submit() {
-      try {
-        const response = await fetch("http://localhost:3000/SignIn", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(inputData),
-         });
-  
- 
-         if (response.ok) {
-        // Authentication successful, handle the response accordingly
+  async function submit() {
+    try {
+      const response = await fetch("http://localhost:3000/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(SignIn),
+      });
+
+      if (response.ok) {
+        console.log("authentification ok");
       } else {
-        // Authentication failed, handle error
+        console.error("Failed to connect:", response.statusText);
       }
     } catch (error) {
       console.error("Error signing in:", error);
     }
-   </script> 
+  }
+</script>
 
 <div class="form-container">
   <form on:submit={submit}>
     <label for="pseudo">Pseudo:</label>
-    <input type="text" bind:value={inputData.pseudo} id="pseudo" required />
+    <input type="text" bind:value={SignIn.pseudo} id="pseudo" required />
     <label for="email">Email:</label>
-    <input type="email" bind:value={inputData.mail} id="email" required />
+    <input type="email" bind:value={SignIn.mail} id="email" required />
     <label for="password">Password:</label>
     <input
       type="password"
-      bind:value={inputData.password}
+      bind:value={SignIn.password}
       id="password"
       required
     />
-    <button type="submit">Register</button>
+    <button type="submit">Sing in </button>
   </form>
 </div>
 

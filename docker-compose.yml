@@ -28,7 +28,7 @@ services:
     image: postgres:latest
     restart: always
     volumes: 
-      - ./data/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./data/sql/init.ddl.sql:/docker-entrypoint-initdb.d/init.ddl.sql
     environment:
       - POSTGRES_DB=my_database
       - POSTGRES_USER=myuser
