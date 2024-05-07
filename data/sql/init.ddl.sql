@@ -1,12 +1,12 @@
 DROP TABLE IF EXISTS 
 	players, fireteams, players_fireteams;
 
--- CREATE TABLE fireteams (
--- 	id serial,
--- 	title varchar (255) NOT NULL,
--- 	CONSTRAINT fireteams_pkey PRIMARY KEY (id),
--- 	CONSTRAINT fireteams_title_ukey UNIQUE (title)
--- );
+CREATE TABLE fireteams (
+	id serial,
+	title varchar (255) NOT NULL,
+	CONSTRAINT fireteams_pkey PRIMARY KEY (id),
+	CONSTRAINT fireteams_title_ukey UNIQUE (title)
+);
 
 CREATE TABLE players (
 	id serial,

@@ -1,21 +1,24 @@
-// import { Injectable, NotFoundException } from '@nestjs/common';
-// import { InjectRepository } from '@nestjs/typeorm';
-// import { Repository } from 'typeorm';
-// import { Fireteam } from './fireteams.entity';
-// import { CreateFireteamDto } from './fireteams.dto'
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Fireteam } from './fireteams.entity';
+import { CreateFireteamDto } from './fireteams.dto'
 
-// @Injectable()
-// export class FireteamService {
-//   constructor(
-//     @InjectRepository(Fireteam)
-//     private readonly fireteamRepository: Repository<Fireteam>,
-//   ) {}
+@Injectable()
+export class FireteamService {
+  create(createFireteamDto: CreateFireteamDto): Fireteam | PromiseLike<Fireteam> {
+    throw new Error('Method not implemented.');
+  }
+  constructor(
+    @InjectRepository(Fireteam)
+    private readonly fireteamRepository: Repository<Fireteam>,
+  ) {}
 
-//   async createFireteam (createFireteamDto: CreateFireteamDto): Promise<Fireteam> {
-//     const { title } = createFireteamDto;
-//     const fireteam = this.fireteamRepository.create({ title });
-//     return this.fireteamRepository.save(fireteam);
-//   }
+  async createFireteam (createFireteamDto: CreateFireteamDto): Promise<Fireteam> {
+    const { title } = createFireteamDto;
+    const fireteam = this.fireteamRepository.create({ title });
+    return this.fireteamRepository.save(fireteam);
+  }
 
 //   async findAll(): Promise<Fireteam[]> {
 //     return await this.fireteamRepository.find();
@@ -35,4 +38,4 @@
 //       throw new NotFoundException('Fireteam not found');
 //     }
 //   }
-//  }
+ }

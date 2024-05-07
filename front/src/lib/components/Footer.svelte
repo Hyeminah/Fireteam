@@ -1,27 +1,39 @@
+<script lang="ts">
+  import bungie_logo_footer from "../img/bungie_logo_footer.png";
+</script>
+
 <div class="footer">
-    <p class="copy">&copy; 2024 My Website</p>
-  </div>
-  
-  <style>
-    .footer {
-      position: fixed at  the bottom of the page;
-      display: flex;
-      justify-content: right;
-      height: 100px;
-      width: 100%;
-      background-color: rgba(31, 34, 39, 0.8); /* Background color with transparency */
-      font-weight: bold;
-      font-size: 10px;
-      bottom: 0;
-      left: 0;
+  <img class="bungie_logo_footer" src={bungie_logo_footer} alt="bungie_logo_footer" />
+  <p class="copy">&copy; 2024 Bungie, Inc All rights reserved</p>
+</div>
 
+<style>
+  .footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+    text-align: center;
+    opacity: 1;
+    background: #14191e;
+    border: solid 5px red;
+    padding: 10px 0;
+
+}
+  .copy {
+    height: 20px;
+    width: 250px ;
+    margin-top: 22px;
+    margin-right: 60px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+   border: solid 5px red;
     
-    }
-    .copy {
-      margin-top: 22px;
-      margin-right: 60px;
-      color: #13161b;
-      font-size: 15px;
-    }
-
+  }
+  .bungie_logo_footer {
+    padding: 10px;
+    z-index: 1;
+    border: solid 5px red;
+  }
 </style>

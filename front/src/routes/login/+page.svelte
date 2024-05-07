@@ -1,12 +1,12 @@
 <script lang="ts">
-import RegistrationForm from "../../lib/components/RegistrationForm.svelte";
+    import Login from "../../lib/components/Login.svelte";
+    
+    </script>
+    <Login />
 
-</script>
-<RegistrationForm />
-
-<h1 class="title" id="pageTitle">Registration</h1>
+<h1 class="title" id="pageTitle">Login</h1>
 <style>
-
+    
 .title {
     position: absolute;
     color: whitesmoke;

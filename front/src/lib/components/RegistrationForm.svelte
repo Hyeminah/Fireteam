@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Header from "$lib/components/Header.svelte";
   import type { player } from "../../routes/player/player";
 
   export let inputData: player = {
@@ -62,7 +61,7 @@
 
 <style>
   .form-container {
-    position: absolute;
+    position:absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
