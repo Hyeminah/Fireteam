@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Player } from './players.entity';
 import * as bcrypt from 'bcrypt';
 import { CreatePlayerDto } from './players.dto';
+import jwt from 'jsonwebtoken';
 
 
 
@@ -24,18 +25,22 @@ export class PlayerService {
     
     return this.playerRepository.save(newPlayer);
   }
-  async loginPlayer(createPlayerDto: CreatePlayerDto){
-    const player = await this.playerRepository.findOne ({
-      where: {
-        mail: createPlayerDto.mail,
-        password: createPlayerDto.password
-      }
-    })
-    if (!player) {
-      throw new NotFoundException('Player not found');
+  async authenticatePlayer(mail: string, password: string): Promise<string | null> {
+    const player = await this.playerRepository.findOne({ where: { mail: mail } }) ;
+    
+    if (player && await bcrypt.compare(password, player.password)) {
+      const token = jwt.sign({ playerId: player.id }, 'your_secret_key_here', { expiresIn: '1h' });
+        return token;
+    }
+    
+    return null; // Return null if authentication fails
+}
+
+    // if (!player) {
+    //   throw new NotFoundException('Player not found');
     
   }
-  }
+  
 
 //   async update(id: number, updatePlayerDto: CreatePlayerDto): Promise<Player> {
 //     const player = await this.findOne(id);
@@ -52,4 +57,3 @@ export class PlayerService {
 //     await this.playerRepository.remove(player);
 //   }
 
-}

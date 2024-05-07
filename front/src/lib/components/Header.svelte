@@ -9,8 +9,6 @@
   <img class="logo_bungie" src={logo} alt="Logo" />
 
   <img class="header_background" src={header_background} alt="season" />
-
-  <h1 class="title" id="pageTitle">Default Title</h1>
   <nav class="menu content">
     <!-- <ul>
       <Lien ref="./authentification " text="authentification"/>
@@ -25,8 +23,9 @@
     background: #12171c;
     padding: 20px;
     z-index: 1;
+    margin: 0;
+    
   }
-
   .logo_bungie {
     position: absolute;
     padding: 0% ;
@@ -37,27 +36,14 @@
     height: 40px;
     z-index: 1;
   }
- 
-  .title {
-    position: absolute;
-    color: whitesmoke;
-    font-family: "Akaya Telivigala", sans-serif;
-    top: 8rem;
-    left: 1rem;
-    letter-spacing: -2px;
-  }
-
-  .header_background {
-    object-fit: cover;
+   .header_background {
     position: relative;
     margin: 0;
-    max-width: 1664px;
     top: 0;
     left: 0;
     width: 100%; 
     height: 100%; 
+ 
    
   }
-
- 
 </style>

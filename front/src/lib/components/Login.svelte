@@ -2,25 +2,26 @@
   import Header from "$lib/components/Header.svelte";
   import type { player } from "../../routes/player/player";
   import Footer from "./Footer.svelte";
+  import { writable } from "svelte/store";
 
-  export let SignIn: player = {
+  export const signInData = writable ( {
     pseudo: "",
     mail: "",
     password: "",
-  };
+  });
 
   async function submit() {
     try {
-      const response = await fetch("http://localhost:3000/signin", {
+      const response = await fetch("http://localhost:3000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(SignIn),
+        body: JSON.stringify($signInData),
       });
 
       if (response.ok) {
-        console.log("authentification ok");
+        console.log("Authentication ok");
       } else {
         console.error("Failed to connect:", response.statusText);
       }
@@ -33,17 +34,17 @@
 <div class="form-container">
   <form on:submit={submit}>
     <label for="pseudo">Pseudo:</label>
-    <input type="text" bind:value={SignIn.pseudo} id="pseudo" required />
+    <input type="text" bind:value={$signInData.pseudo} id="pseudo" required />
     <label for="email">Email:</label>
-    <input type="email" bind:value={SignIn.mail} id="email" required />
+    <input type="email" bind:value={$signInData.mail} id="email" required />
     <label for="password">Password:</label>
     <input
       type="password"
-      bind:value={SignIn.password}
+      bind:value={$signInData.password}
       id="password"
       required
     />
-    <button type="submit">Sing in </button>
+    <button type="submit">Login </button>
   </form>
 </div>
 
@@ -60,7 +61,7 @@
     padding: 20px;
     border-radius: 10px;
     width: 300px;
-    z-index: 1;
+    z-index: 2;
   }
 
   .form-container label {
