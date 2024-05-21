@@ -1,22 +1,16 @@
-import { Controller, Get, Post, Body, HttpStatus, Res, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, HttpStatus, Res, NotFoundException, UseGuards } from '@nestjs/common';
 import { FireteamService } from './fireteams.service';
 import { CreateFireteamDto } from './fireteams.dto';
-import { Fireteam } from './fireteams.entity';
+import { AuthModule } from 'src/Auth/auth.module';
 
 @Controller()
 export class FireteamController {
   constructor(private readonly fireteamService: FireteamService) {}
 
-  @Post("creationFireteam")
-    fireteam (@Body() fireteam: CreateFireteamDto) {
-        console.log(fireteam);
-        return this.fireteamService.createFireteam (fireteam);
-    }
-
-  
-  @Post()
-  async create(@Body() createFireteamDto: CreateFireteamDto): Promise<Fireteam> {
-    return await this.fireteamService.create(createFireteamDto);
+  @Post('/creationFireteam')
+  @UseGuards(AuthModule)
+  async createFireteam(@Body() createFireteamDto: CreateFireteamDto) {
+    return this.fireteamService.createFireteam(createFireteamDto);
   }
 
 //   @Get()

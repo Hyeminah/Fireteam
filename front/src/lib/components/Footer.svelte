@@ -16,7 +16,6 @@
     text-align: center;
     opacity: 1;
     background: #14191e;
-    border: solid 5px red;
     padding: 10px 0;
 
 }
@@ -28,12 +27,10 @@
     color: white;
     font-size: 15px;
     font-weight: bold;
-   border: solid 5px red;
     
   }
   .bungie_logo_footer {
     padding: 10px;
     z-index: 1;
-    border: solid 5px red;
   }
 </style>

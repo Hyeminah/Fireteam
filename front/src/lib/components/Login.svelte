@@ -1,32 +1,40 @@
-<script lang="ts">
-  import Header from "$lib/components/Header.svelte";
-  import type { player } from "../../routes/player/player";
-  import Footer from "./Footer.svelte";
-  import { writable } from "svelte/store";
+<script lang=ts>
+  import { writable } from 'svelte/store';
 
-  export const signInData = writable ( {
+  export const signInData = writable({
     pseudo: "",
     mail: "",
     password: "",
   });
 
-  async function submit() {
+  // store for the authentication state and token
+  export const isAuthenticated = writable(false);
+  export const authToken = writable('');
+
+  
+  async function submit(event: Event ) {
+    event.preventDefault();
+    
     try {
-      const response = await fetch("http://localhost:3000/login", {
-        method: "POST",
+      const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify($signInData),
       });
 
       if (response.ok) {
-        console.log("Authentication ok");
+        const data = await response.json();
+        console.log('Authentication successful');
+        authToken.set(data.access_token);
+        isAuthenticated.set(true);
+        localStorage.setItem('authToken', data.access_token); // Store token in localStorage
       } else {
-        console.error("Failed to connect:", response.statusText);
+        console.error('Failed to connect:', response.statusText);
       }
     } catch (error) {
-      console.error("Error signing in:", error);
+      console.error('Error signing in:', error);
     }
   }
 </script>
@@ -38,13 +46,8 @@
     <label for="email">Email:</label>
     <input type="email" bind:value={$signInData.mail} id="email" required />
     <label for="password">Password:</label>
-    <input
-      type="password"
-      bind:value={$signInData.password}
-      id="password"
-      required
-    />
-    <button type="submit">Login </button>
+    <input type="password" bind:value={$signInData.password} id="password" required />
+    <button type="submit">Login</button>
   </form>
 </div>
 
@@ -85,7 +88,7 @@
     border: none;
     background-color: #13161b;
     color: whitesmoke;
-    font-family: "Akaya Telivigala", sans-serif;
+    font-family: 'Akaya Telivigala', sans-serif;
     border-radius: 5px;
     cursor: pointer;
   }

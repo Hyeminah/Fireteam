@@ -1,35 +1,55 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  Post,
+  BadRequestException,
+} from '@nestjs/common';
 import { CreatePlayerDto } from './players.dto';
 import { PlayerService } from './players.service';
-import { Player } from './players.entity';
 
 @Controller()
 export class PlayerController {
-  constructor(private readonly playersService: PlayerService) {}
+  constructor(
+    private readonly playersService: PlayerService,
+  ) {}
 
   @Post('/register')
+  @HttpCode(201)
   async createPlayer(@Body() CreatePlayerDto: CreatePlayerDto) {
-    console.log(CreatePlayerDto);
-    return this.playersService.createPlayer(CreatePlayerDto);
+    try {
+      await this.playersService.createPlayer(CreatePlayerDto);
+      return { message: 'Account created successfully' };
+    } catch (error) {
+      if (error instanceof BadRequestException) {
+        throw new BadRequestException(error.message);
+      } else {
+        throw new BadRequestException(
+          'An error occurred while creating the account',
+        );
+      }
+    }
   }
   @Post('/login')
+  @HttpCode(201)
   async loginPlayer(
-    @Body() loginCredentials: { mail: string; password: string },
-  ) {
-    const { mail, password } = loginCredentials;
-
-    const authenticatedPlayer = await this.playersService.authenticatePlayer(
-      mail,
-      password,
-    );
-    if (authenticatedPlayer !== null) {
-      return {
-        message: 'Authentication successful',
-        player: authenticatedPlayer,
-      };
+    @Body() loginCredentials: { mail: string; password: string; pseudo:string },
+  ) {try {
+    const { access_token } = await this.playersService.login(CreatePlayerDto);
+    return { accessToken: access_token };
+} catch (error) {
+    if (error instanceof BadRequestException) {
+        throw new BadRequestException(error.message);
     } else {
-      // Authentication failed
-      return { message: 'Authentication failed' };
+        throw new BadRequestException('An error occurred while connecting');
     }
+
+    
+  // @Post('/protected-route')
+  // @UseGuards(JwtAuthGuard)
+  // protectedRoute(@Request() req) {
+  //   return { message: 'You have accessed a protected route', player: req.user };
+  // }
+}
   }
 }

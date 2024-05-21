@@ -1,16 +1,17 @@
 <script lang="ts">
     import type { fireteam } from "../../routes/fireteam/fireteam";
-  
+
     export let fireteamData: fireteam = {
       title: "",
     };
   
-    async function submit() {
+    async function submit(event: Event) {
       try {
-        const response = await fetch("http://localhost:3000/fireteams", {
+        const response = await fetch("http://localhost:3000/creationFireteam", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: 'Bearer ${get(authToken)}'
           },
           body: JSON.stringify(fireteamData),
         });
@@ -29,7 +30,7 @@
   <div class="form-container">
     <form on:submit={submit}>
       <label for="title">Title:</label>
-      <input type="text" bind:value={fireteamData.title} id="title" required />
+      <input type="text" bind:value={fireteamData.title} id="title" required minlength="{10}"/>
       <button type="submit">Create Fireteam</button>
     </form>
   </div>
@@ -80,4 +81,3 @@
       background-color: #333;
     }
   </style>
-  
