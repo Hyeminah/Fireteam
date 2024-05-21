@@ -15,13 +15,11 @@
   main {
     min-height: 70vh;
   }
-
   :global(body) {
     margin: 0;
     padding: 0;
     z-index: -1;
     background-color: #13181f;
-    border: solid 5px red;
     
   }
 </style>

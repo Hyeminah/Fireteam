@@ -29,6 +29,7 @@ services:
     restart: always
     volumes: 
       - ./data/sql/init.ddl.sql:/docker-entrypoint-initdb.d/init.ddl.sql
+      - ./data/test.dml.sql:/docker-entrypoint-initdb.d/test.dml.sql
     environment:
       - POSTGRES_DB=my_database
       - POSTGRES_USER=myuser
