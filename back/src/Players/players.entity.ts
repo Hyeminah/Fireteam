@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn, JoinTable, ManyToMany } from 'typeorm';
 import { Fireteam } from 'src/Fireteams/fireteams.entity';
 
 
@@ -15,9 +15,22 @@ export class Player {
 
     @Column({ length: 1000 })
     password: string;
-}
 
-    // @OneToMany(() => Fireteam, fireteam => players_fireteams)
-    // fireteams: Fireteam[];
+
+    @ManyToMany(() => Fireteam, fireteam => fireteam)
+    @JoinTable({
+        name: 'player_fireteam',
+        joinColumn: {
+            name: 'player_id', 
+            referencedColumnName:'id',
+        },
+        inverseJoinColumn: {
+            name: 'fireteam_id',
+            referencedColumnName:'id',
+    },
+    })
+    fireteams: Fireteam[];
+}
+  
 
 

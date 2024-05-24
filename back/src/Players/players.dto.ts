@@ -1,6 +1,4 @@
-export class CreatePlayerDto  {
-    id: number;
-    
+export class CreatePlayerDto  {  
     mail: string;
 
     password: string;

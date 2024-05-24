@@ -1,5 +1,6 @@
 <script lang=ts>
   import { writable } from 'svelte/store';
+  import { goto } from '$app/navigation';
 
   export const signInData = writable({
     pseudo: "",
@@ -26,7 +27,7 @@
 
       if (response.ok) {
         const data = await response.json();
-        console.log('Authentication successful');
+        goto('/creationFireteam');
         authToken.set(data.access_token);
         isAuthenticated.set(true);
         localStorage.setItem('authToken', data.access_token); // Store token in localStorage

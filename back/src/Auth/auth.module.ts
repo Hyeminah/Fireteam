@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Player } from 'src/Players/players.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { PlayerService } from 'src/Players/players.service';
+import { AuthService } from './auth.service';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { PlayerService } from 'src/Players/players.service';
       signOptions: { expiresIn: '1h' },
     }),
   ],
-  providers: [PlayerService],
-  exports: [PlayerService],
+  providers: [PlayerService, AuthService],
+  exports: [PlayerService, AuthService],
 })
 export class AuthModule { }

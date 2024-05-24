@@ -6,6 +6,7 @@ import { Player } from './Players/players.entity';
 import { PlayerModule } from './Players/players.module';
 import { FireteamModule } from './Fireteams/fireteams.module';
 import { AuthModule } from './Auth/auth.module';
+import { Fireteam } from './Fireteams/fireteams.entity';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { AuthModule } from './Auth/auth.module';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [Player],
+      entities: [Player,Fireteam],
       synchronize: false,
       autoLoadEntities: true,
       logging: true,

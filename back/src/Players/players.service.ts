@@ -1,19 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Player } from './players.entity';
 import * as bcrypt from 'bcrypt';
 import { CreatePlayerDto } from './players.dto';
-import { JwtService } from '@nestjs/jwt';
-import { FindOneOptions } from 'typeorm';
-
 
 @Injectable()
 export class PlayerService {
   constructor(
     @InjectRepository(Player)
     private readonly playerRepository: Repository<Player>,
-    private readonly jwtService: JwtService,
   ) {}
 
   async createPlayer(createPlayerDto: CreatePlayerDto) {
@@ -26,53 +22,22 @@ export class PlayerService {
     return this.playerRepository.save(newPlayer);
   }
 
-  async authenticatePlayer(mail: string, password: string): Promise<any> {
-    const player = await this.playerRepository.findOne({ where: { mail: mail } });
+  async login(mail: string, password: string): Promise<Player> {
+    const player = await this.playerRepository.findOne({ where: { mail } });
 
-    if (player && await bcrypt.compare(password, player.password)) {
-      return player; // Return player if authentication is successful
+    if (!player) {
+      throw new UnauthorizedException('Incorrect email or password.');
     }
 
-    return null; // Return null if authentication fails
-  }
+    const isPasswordValid = await bcrypt.compare(password, player.password);
 
-  async login(player: any) {
-    const payload = { playerId: player.id };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Incorrect email or password.');
+    }
+
+    return player; // Return the player object
   }
+ catch (error) {
+  throw error;
 }
-  
-  // async updatePlayer(playerId: number, updatePlayerDto: CreatePlayerDto): Promise<Player | null> {
-  //   const player = await this.playerRepository.findOne(playerId);
-
-  //   if (!player) {
-  //       return null; // Player not found
-  //   }
-
-  //   if (updatePlayerDto.pseudo) {
-  //       player.pseudo = updatePlayerDto.pseudo;
-  //   }
-  //   if (updatePlayerDto.mail) {
-  //       player.mail = updatePlayerDto.mail;
-  //   }
-  //   if (updatePlayerDto.password) {
-  //       const hashedPassword = await bcrypt.hash(updatePlayerDto.password, 10);
-  //       player.password = hashedPassword;
-  //   }
-
-  //   // Save the updated player to the database
-  //   await this.playerRepository.save(player);
-
-  //   return player;
-
-
-  // if (!player) {
-  //   throw new NotFoundException('Player not found');
-// }
-
-//   async remove(id: number): Promise<void> {
-//     const player = await this.findOne(id);
-//     await this.playerRepository.remove(player);
-//   }
+}

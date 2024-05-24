@@ -1,8 +1,6 @@
-import { IntegerType } from "typeorm";
-
 export class CreatePlayerFireteamDto {
-  
+fireteamId:number; 
 playerId: number;
-startTime: Date;
-endTime: Date;
+startTime?: Date;
+endTime?: Date;
 }

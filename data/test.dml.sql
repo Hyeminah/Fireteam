@@ -1,6 +1,7 @@
 DELETE FROM players;
 DELETE FROM fireteams;
 
+
 INSERT INTO players (mail, password, pseudo)
 VALUES 
   ('player1@example.com', '$2a$12$jZZ8yNRAdSd7ISeySRHUMuysFup0q.nsvt2rG94tV/NgMD9DP8nuK', 'Player1'),

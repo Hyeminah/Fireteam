@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { player } from "../../routes/player/player";
+  import { goto } from "$app/navigation";
 
   export let inputData: player = {
     pseudo: "",
@@ -22,7 +23,7 @@
         });
 
         if (response.ok) {
-          console.log("Data sent successfully");
+         goto ('/login');
         } else {
           console.error("Failed to send data:", response.statusText);
         }
@@ -32,6 +33,7 @@
     } else {
       alert("Passwords do not match");
     }
+
   }
 </script>
 
