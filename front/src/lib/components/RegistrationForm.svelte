@@ -1,17 +1,40 @@
 <script lang="ts">
   import type { player } from "../../routes/player/player";
   import { goto } from "$app/navigation";
+ 
 
+ 
   export let inputData: player = {
     pseudo: "",
     mail: "",
     password: "",
   };
   let confirmPassword = "";
-
   let passwordMatch = false;
 
+  const pseudoRegex = /^[a-zA-Z0-9]{3,16}$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  
+
+
   async function submit() {
+    if (!pseudoRegex.test(inputData.pseudo)) {
+      alert("Pseudo must be 3-16 characters long and contain only letters and numbers.");
+      return;
+    }
+    if (!emailRegex.test(inputData.mail)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    if (!passwordRegex.test(inputData.password)) {
+      alert("Password must be at least 8 characters long and contain both letters and numbers.");
+      return;
+    }
+    if ((passwordMatch = inputData.password !== confirmPassword)) {
+      alert("Passwords do not match.");
+      return;
+    }
     if ((passwordMatch = inputData.password === confirmPassword)) {
       try {
         const response = await fetch("http://localhost:3000/register", {
@@ -23,7 +46,7 @@
         });
 
         if (response.ok) {
-         goto ('/login');
+         goto ('/login')
         } else {
           console.error("Failed to send data:", response.statusText);
         }
@@ -35,6 +58,10 @@
     }
 
   }
+ 
+  // export const playerId = {
+  //   subscribe: playerIdStore.subscribe
+  // };
 </script>
 
 <div class="form-container">

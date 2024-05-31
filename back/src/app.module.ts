@@ -23,7 +23,7 @@ import { Fireteam } from './Fireteams/fireteams.entity';
       entities: [Player,Fireteam],
       synchronize: false,
       autoLoadEntities: true,
-      logging: true,
+      logging: false,
     }),
   ],
   controllers: [AppController],

@@ -26,4 +26,3 @@ export class Fireteam {
 })
 players: Player[ ];
 }
-

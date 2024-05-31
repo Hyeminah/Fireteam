@@ -10,6 +10,7 @@
       <a href="/login" class="button">Login</a>
       <a href="/register" class="button">Register</a>
       <a href="/creationFireteam" class="button">Create Fireteam</a>
+      <a href="/fireteam" class="button"> Join Fireteam</a>
     </nav>
   </div>
   <img class="header_background" src={header_background} alt="season" />

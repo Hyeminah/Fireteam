@@ -11,6 +11,7 @@
   // store for the authentication state and token
   export const isAuthenticated = writable(false);
   export const authToken = writable('');
+  const errorMessage= writable<string | null>(null);
 
   
   async function submit(event: Event ) {
@@ -31,11 +32,19 @@
         authToken.set(data.access_token);
         isAuthenticated.set(true);
         localStorage.setItem('authToken', data.access_token); // Store token in localStorage
+        errorMessage.set(null); // Clear any previous error messages
       } else {
-        console.error('Failed to connect:', response.statusText);
+        const errorData = await response.json();
+        if (response.status === 400) {
+          errorMessage.set('Invalid email or password. Please try again.');
+        } else {
+          errorMessage.set('Failed to connect. Please try again later.');
+        }
+        console.error('Failed to connect:', errorData);
       }
     } catch (error) {
-      console.error('Error signing in:', error);
+      const errorText = error instanceof Error ? error.message : 'An unknown error occurred';
+      errorMessage.set(`Error signing in: ${errorText}`);
     }
   }
 </script>
@@ -49,6 +58,9 @@
     <label for="password">Password:</label>
     <input type="password" bind:value={$signInData.password} id="password" required />
     <button type="submit">Login</button>
+    {#if $errorMessage}
+    <p class="error">{$errorMessage}</p>
+    {/if}
   </form>
 </div>
 
@@ -96,5 +108,10 @@
 
   .form-container button:hover {
     background-color: #333;
+  }
+  .error {
+    color: red;
+    margin-top: 1rem;
+    font-family: 'Akaya Telivigala', sans-serif;
   }
 </style>
