@@ -71,19 +71,25 @@
 <style>
   .fireteams-container {
     position: absolute;
-    top: 50%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top:70%;
     left: 50%;
     transform: translate(-50%, -50%);
     flex-direction: column;
-    align-items: center;
-    height: auto;
     width: 80%;
+    height: 80%;
+   
+    
   }
 
   .fireteam-card {
     background-color: #1f2227;
     padding: 1rem;
     border-radius: 0.5rem;
+    width: 100%; 
   }
 
   .fireteam-title {

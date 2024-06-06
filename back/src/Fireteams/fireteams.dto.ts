@@ -1,12 +1,12 @@
 import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
 
 export class CreateFireteamDto {
-  @IsNotEmpty({ message: "Le titre de l'escouade est requis" })
+  @IsNotEmpty({ message: "Fireteam title is required" })
   @IsString({
-    message: "Le titre de l'escouade doit être une chaîne de caractères",
+    message: "Fireteam title must be a string",
   })
   @MaxLength(255, {
-    message: "Le titre de l'escouade ne peut pas dépasser 255 caractères",
+    message: "Fireteam title cannot exceed 255 characters",
   })
   title: string;
 }
